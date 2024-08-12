@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TrackController;
@@ -79,4 +80,4 @@ if($id<count($users))
  Route::put('/tracks/{id}/update',[TrackController::class,'update'])->name('Track.update');
 
 
-
+Route::resource('/courses',CourseController::class);
