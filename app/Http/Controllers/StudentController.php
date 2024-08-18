@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\Track;
+
 class StudentController extends Controller
 {
         function index()
@@ -25,7 +27,11 @@ class StudentController extends Controller
     }
     function create()
     {
-       return view('students.create');
+    //    return view('students.create');
+       $tracks=Track::all();
+
+       return view('students.create',compact('tracks'));
+
     }
     public function destroy($id)
     {
@@ -35,21 +41,24 @@ class StudentController extends Controller
     }
     function store(Request $requestData)
     {
+        
+   $requestData=request()->all();
+            // $img = $requestData->file('image');
+            // $ext = $img->getClientOriginalExtension();
+            // $name = uniqid() . '.' . $ext;
+            // $img->move(public_path('uploads/students'), $name);
 
-            $img = $requestData->file('image');
-            $ext = $img->getClientOriginalExtension();
-            $name = uniqid() . '.' . $ext;
-            $img->move(public_path('uploads/students'), $name);
+            // $student = new Student();
+            // $student->name = $requestData['name'];
+            // $student->email = $requestData['email'];
+            // $student->gender = $requestData['gender'];
+            // $student->grade = $requestData['grade'];
+            // $student->address = $requestData['address'];
+            // $student->image = $name;
 
-            $student = new Student();
-            $student->name = $requestData['name'];
-            $student->email = $requestData['email'];
-            $student->gender = $requestData['gender'];
-            $student->grade = $requestData['grade'];
-            $student->address = $requestData['address'];
-            $student->image = $name;
-
+            $student=Student::create($requestData);
             $student->save();
+
 
             return redirect()->route('students');
 

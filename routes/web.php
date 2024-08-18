@@ -74,7 +74,7 @@ if($id<count($users))
  Route::get('/tracks',[TrackController::class,'index'])->name('Tracks');
  Route::get('/track/{id}',[TrackController::class,'view'])->name('Track');
  Route::get('/delete/{track}', [TrackController::class, 'destroy'])->name('Track.destroy');
- Route::get('/tracks/{id}/create',[TrackController::class,'create'])->name('Track.create');
+ Route::get('/tracks/create',[TrackController::class,'create'])->name('Track.create');
  Route::post('/tracks/store',[TrackController::class,'store'])->name('Track.store');
  Route::get('/tracks/{id}/edit',[TrackController::class,'edit'])->name('Track.edit');
  Route::put('/tracks/{id}/update',[TrackController::class,'update'])->name('Track.update');

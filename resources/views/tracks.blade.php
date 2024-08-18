@@ -90,7 +90,7 @@
             @endforeach
         </tbody>
     </table>
-    <a href="{{ route('Track.create', $track->id) }}" class="btn btn-success btn-sm btn-custom">Create</a>
+    <a href="{{ route('Track.create') }}" class="btn btn-success btn-sm btn-custom">Create</a>
 
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

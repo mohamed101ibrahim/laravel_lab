@@ -61,7 +61,15 @@
            Female
             </label>
           </div>
+          <div class="mt-3">
+            <select class="form-select" aria-label="Default select example" name="track_id">
+                <option selected disabled value="">Select your track</option>
+                @foreach ($tracks as $track )
+                <option value="{{$track->id}}">{{$track->name}}</option>
+                @endforeach
 
+              </select>
+         </div>
 
         <button type="submit" class="btn btn-primary">Create</button>
       </form>

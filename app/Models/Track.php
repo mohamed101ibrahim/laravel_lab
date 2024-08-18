@@ -11,4 +11,9 @@ class Track extends Model
       protected $table="track";
       protected $fillable=['name','grade','Number_of_courses','Number_of_Students','logo'];
 
+
+      function students(){
+        return $this->hasMany(Student::class);
+      }
+
 }
