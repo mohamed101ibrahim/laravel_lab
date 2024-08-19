@@ -3,7 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\StudentController;
-
+use App\Http\Controllers\Api\TrackController;
+use App\Http\Controllers\Api\CourseController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -14,9 +15,9 @@ Route::get
     return "Hi From Api";
 });
 
-Route::get('/students', [StudentController::class, 'index']);
-Route::get('/students/show/{id}', [StudentController::class, 'show']);
+Route::apiResource('students',StudentController::class);
 
-Route::post('/students/store', [StudentController::class, 'store']);
-Route::post('/students/update/{id}', [StudentController::class, 'update']);
-Route::delete('/students/delete/{id}', [StudentController::class, 'delete']);
+Route::apiResource('tracks',TrackController::class);
+
+
+Route::apiResource('courses',CourseController::class);

@@ -15,5 +15,8 @@ class Track extends Model
       function students(){
         return $this->hasMany(Student::class);
       }
+      function courses(){
+        return $this->hasMany(Course::class);
+      }
 
 }

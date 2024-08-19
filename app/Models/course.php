@@ -9,6 +9,9 @@ class course extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'description', 'gender', 'instractor','grade'
+        'name', 'description', 'grade', 'instractor','grade','track_id'
     ];
+    function track(){
+        return $this->belongsTo(Track::class);
+    }
 }

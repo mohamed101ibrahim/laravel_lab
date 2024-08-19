@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+use App\Http\Resources\StudentResource;
 
 use App\Http\Controllers\Controller;
 
@@ -12,38 +13,76 @@ use Illuminate\Support\Facades\DB;
 class StudentController extends Controller
 {
     public function index(){
-        $students = Student::get();
-        return response()->json($students);
+
+            $students=Student::all();
+            return StudentResource::collection($students);
+
+
     }
 
     public function show($id)
     {
         $student = Student::findOrFail($id);
-        return response()->json($student);
+        return new StudentResource($student);
+
     }
     public function store(Request $request)
+
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'address' => 'required',
+            'email' => 'required|email',
+            'gender' => 'required',
+            'image' => 'nullable|image',
+            'grade' => 'required',
+        ]);
+
+
+
+
+
         $result = Student::create($request->all());
-        return response($result,201);
-    }
+        $students=Student::all();
+            return StudentResource::collection($students);
+        }
     public function update(Request $request, $id)
     {
-        $result = Student::findOrFail($id);
-        $result->update($request->all());
-        return response($result,200);
-    }
-    public function delete($id)
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'address' => 'required',
+            'email' => 'required|email',
+            'gender' => 'required',
+            'image' => 'nullable|image',
+            'grade' => 'required',
+        ]);
+
+        $student = Student::findOrFail($id);
+
+
+        if ($request->hasFile('image')) {
+            $img = $request->file('image');
+            $ext = $img->getClientOriginalExtension();
+            $name = uniqid() . '.' . $ext;
+            $img->move(public_path('uploads/students'), $name);
+            $student->image = $name;
+        }
+
+
+        $student->update($request->all());
+
+
+        $student->save();
+
+        return new StudentResource($student);    }
+    public function destroy($id)
     {
-        $result = Student::findOrFail($id);
-        $result = Student::destroy($id);
-        return response()->json(['message'=>'student deleted'],200);
+
+        $student = Student::findOrFail($id);
+        $student->delete();
+
+        return StudentResource::collection(Student::all());
+
     }
-
-
-
-
-
-
-
 
 }

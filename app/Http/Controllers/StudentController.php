@@ -41,7 +41,7 @@ class StudentController extends Controller
     }
     function store(Request $requestData)
     {
-        
+
    $requestData=request()->all();
             // $img = $requestData->file('image');
             // $ext = $img->getClientOriginalExtension();
